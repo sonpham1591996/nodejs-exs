@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Count down application</title>
+  </head>
+  <body>
+    <input
+      type="number"
+      id="maxSeconds"
+      placeholder="Input the number of seconds..."
+    />
+    <button type="button" id="btnCountDown" onclick="onBtnCountDownClicked()">
+      Start to count down
+    </button>
+
+    <h1 id="currentSecond"></h1>
+  </body>
+  <script>
+    let interval;
+    function onBtnCountDownClicked() {
+      let maxSeconds = +(document.getElementById("maxSeconds").value ?? "0");
+      if (maxSeconds <= 0) return;
+
+      const currentSecondEl = document.getElementById("currentSecond");
+      if (!currentSecond) return;
+
+      if (interval) clearInterval(interval);
+      currentSecondEl.innerText = maxSeconds;
+
+      interval = setInterval(() => {
+        if (maxSeconds === 0) {
+          clearInterval(interval);
+          currentSecondEl.innerText = "counter finished";
+        } else {
+          currentSecondEl.innerText = --maxSeconds;
+        }
+      }, 1000);
+    }
+  </script>
+</html>
