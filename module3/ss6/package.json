@@ -1,0 +1,16 @@
+{
+  "name": "ss6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "qs": "^6.11.1",
+    "url": "^0.11.0"
+  }
+}
