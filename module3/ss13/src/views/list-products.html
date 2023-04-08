@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .container {
+            width: 30%;
+            margin: 2rem auto;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .ml-2 {
+            margin: 0.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h4 class="text-xl font-bold text-center">List products</h4>
+        <a class="text-blue-500" href="/products/createForm">Create</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {listProducts}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
