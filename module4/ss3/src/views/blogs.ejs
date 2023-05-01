@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Blogs</title>
+
+    <style>
+        body {
+            max-width: 88vw;
+            margin: 2rem auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .justify-end {
+            justify-content: end;
+        }
+
+        .my-2 {
+            margin-top: 10px;
+        }
+
+        #paginationData>a {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/blog-creation-form">Create</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% blogs.forEach((blog)=> { %>
+                <tr>
+                    <td>
+                        <a href="/blogs/<%= blog.id %>"><%= blog.id %></a>
+                    </td>
+                    <td>
+                        <%= blog.title %>
+                    </td>
+                    <td>
+                        <%= blog.content %>
+                    </td>
+                    <td style="font-size: 14px;">
+                        <a href="/blog-update-form/<%= blog.id %>">Edit</a>
+                        <button style="border: none; background-color: white; color: blue; text-decoration: underline;"
+                            onclick="onDelete(<%= blog.id %>)">Delete</button>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</body>
+
+<script>
+    function onDelete(id) {
+        fetch('http://localhost:8080/blogs/' + id, { method: 'DELETE' }).then(() => window.location.href = "/blogs").catch((err) => console.error(err));
+    }
+</script>
+
+</html>
