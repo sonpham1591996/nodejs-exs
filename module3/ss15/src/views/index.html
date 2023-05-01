@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io</title>
+
+    <style>
+        body {
+            max-width: 40vw;
+            margin: 2rem auto;
+        }
+
+        .card {
+            border: 1px solid black;
+            margin: 1rem auto;
+        }
+
+        .card .header {
+            background-color: rgba(49, 49, 184, 0.993);
+            color: white;
+            padding: 4pt 10pt;
+            font-size: 20px;
+        }
+
+        .card .content {
+            font-size: 18px;
+        }
+
+        .card .content .choice {
+            display: flex;
+            padding: 1rem;
+            border-bottom: 1px solid gray;
+        }
+
+        .ml-2 {
+            margin-left: 10px;
+        }
+
+        .ml-auto {
+            margin-left: auto;
+        }
+
+        .btn-vote {
+            margin: 20px;
+            border: black;
+            background-color: rgba(49, 49, 184, 0.993);
+            color: white;
+            padding: 4pt 10pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="listTopic">
+        {listTopic}
+    </div>
+
+    <!-- Thêm thư viện socket.io mà server cung cấp -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        /* Khởi tạo kết nối */
+        const socket = io();
+
+        // lắng nghe sự kiện upToDateVote
+        socket.on('upToDateVote', (data) => {
+            document.getElementById(`topic_${data.topicId}_choice_${data.choice.id}`).innerText = data.choice.vote;
+        });
+
+        function onVote(topicId) {
+            const radioes = document.getElementsByClassName(`topic_${topicId}`);
+
+            let checkedRadio;
+
+            for (let el of radioes) {
+                if (el.checked) {
+                    checkedRadio = el;
+                    break;
+                }
+            }
+
+            if (!checkedRadio) return;
+
+            socket.emit('vote', {
+                topicId: topicId,
+                choiceId: +checkedRadio.value
+            });
+        }
+    </script>
+</body>
+
+</html>
