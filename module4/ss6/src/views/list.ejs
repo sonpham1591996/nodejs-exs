@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List contacts</title>
+    <style>
+        body {
+            max-width: 78vw;
+            margin: 2rem auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: center;
+            border: 1px solid black;
+            padding: 4pt 10pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex; justify-content: end; margin-bottom: 10px;">
+        <a href="/contacts/creation-form">Create</a>
+    </div>
+    <% if (errorMsg) { %>
+        <div style="color: red"><%= errorMsg %></div>
+    <% } %>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% contacts.forEach((contact, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= contact.name %>
+                    </td>
+                    <td>
+                        <%= contact.address %>
+                    </td>
+                    <td>
+                        <%= contact.email %>
+                    </td>
+                    <td>
+                        <%= contact.phoneNumber %>
+                    </td>
+                    <td>
+                        <a href="/contacts/<%= contact.id %>/update-form" style="margin-left: 10px">Update</a>
+                        <a href="/contacts/<%= contact.id %>/delete" style="margin-left: 10px">Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</body>
+
+</html>
